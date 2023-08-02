@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Using Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <form @submit.prevent="submitForm" v-if="!formSubmitted">
+          <span>Full Name</span><br />
+          <input v-model="name" type="text" placeholder="Enter your name" />
+          <br />
+          <span>Email</span>
+          <br />
+          <input
+            v-model="email"
+            type="email"
+            placeholder="Enter your email"
+          /><br />
+          <span>Gender</span>
+          <br />
+          <input type="radio" v-model="gender" value="Male" />
+          <label>Male</label>
+          <input type="radio" v-model="gender" value="Female" />
+          <label>Female</label>
+          <br />
+          <input class="submit" type="submit" value="Submit" />
+        </form>
+        <div v-if="formSubmitted">
+          <h3>Form Submitted</h3>
+          <p>Name: {{ name }}</p>
+          <p>Email: {{ email }}</p>
+          <p>Gender: {{ gender }}</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      Vue.createApp({
+        data: () => ({
+          name: "",
+          email: "",
+          gender: "",
+          formSubmitted: false,
+        }),
+        methods: {
+          submitForm: function () {
+            this.formSubmitted = true;
+          },
+        },
+      }).mount("#app");
+    </script>
+    <style>
+      form {
+        padding: 10px;
+        border: 2px solid black;
+        border-radius: 5px;
+      }
+
+      input {
+        padding: 4px 8px;
+        margin: 4px;
+      }
+
+      span {
+        font-size: 18px;
+        margin: 4px;
+        font-weight: 500;
+      }
+
+      .submit {
+        font-size: 15px;
+        color: #fff;
+        background: #222;
+        padding: 6px 12px;
+        border: none;
+        margin-top: 8px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+    </style>
+  </body>
+</html>
